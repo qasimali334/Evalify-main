@@ -72,3 +72,61 @@ Evalify/
     └── .env                        # Frontend environment variables configuration
 ```
 
+---
+
+## 🌐 Deployment Guide
+
+This project is configured as a monorepo containing a React frontend and a Node.js Express backend. Follow these instructions to deploy them to **Vercel** and **Render** respectively.
+
+### 1. Backend Deployment on Render ([evalify-backend](file:///d:/Projects/Evalify-main/evalify-backend))
+
+Render can deploy Node.js applications using a `render.yaml` Blueprint or manually as a Web Service.
+
+#### Option A: Using the Render Blueprint (Recommended)
+1. Commit and push the [render.yaml](file:///d:/Projects/Evalify-main/render.yaml) file to your GitHub repository.
+2. Log in to [Render Dashboard](https://dashboard.render.com).
+3. Click **New +** and select **Blueprint**.
+4. Connect your GitHub repository. Render will automatically detect the configuration in `render.yaml`.
+5. Enter the required **Environment Variables** (listed below) and click **Deploy**.
+
+#### Option B: Manual Web Service Setup
+1. On the Render Dashboard, click **New +** and select **Web Service**.
+2. Connect your GitHub repository.
+3. Configure the following settings:
+   - **Name**: `evalify-backend`
+   - **Environment**: `Node`
+   - **Root Directory**: `evalify-backend` (Must point to the backend subdirectory)
+   - **Build Command**: `npm install`
+   - **Start Command**: `npm start`
+4. Expand **Advanced** and add the following **Environment Variables**:
+   - `PORT`: `5000`
+   - `NODE_ENV`: `production`
+   - `FRONTEND_URL`: The URL of your deployed Vercel frontend (e.g. `https://evalify-main.vercel.app`)
+   - `DATABASE_URL`: Your PostgreSQL database connection string.
+   - `SUPABASE_URL`: Your Supabase project URL.
+   - `SUPABASE_ANON_KEY`: Your Supabase public anonymous API key.
+   - `GLOT_TOKEN`: Your Glot.io API execution engine token (optional).
+
+---
+
+### 2. Frontend Deployment on Vercel ([evalify-frontend](file:///d:/Projects/Evalify-main/evalify-frontend))
+
+Vercel hosts the React frontend. The codebase already includes [vercel.json](file:///d:/Projects/Evalify-main/evalify-frontend/vercel.json) to handle routing rewrites correctly.
+
+1. Log in to the [Vercel Dashboard](https://vercel.com/dashboard).
+2. Click **Add New** -> **Project** and select your GitHub repository.
+3. Configure the project settings:
+   - **Project Name**: `evalify-main` (or your choice)
+   - **Framework Preset**: Select **Vite**
+   - **Root Directory**: Click *Edit* and select **`evalify-frontend`**
+4. Expand **Build and Output Settings**:
+   - **Build Command**: Set to `npm run build` (override enabled)
+   - **Output Directory**: Set to **`dist`** (override enabled)
+   - **Install Command**: Leave as default (override disabled)
+5. Expand **Environment Variables** and add:
+   - `VITE_SUPABASE_URL`: Your Supabase project URL.
+   - `VITE_SUPABASE_ANON_KEY`: Your Supabase public anonymous API key.
+   - `VITE_API_URL`: Your deployed **Render backend API URL** (e.g., `https://evalify-backend.onrender.com/api`). Notice it must end with `/api`.
+6. Click **Deploy**.
+
+
