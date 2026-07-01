@@ -122,7 +122,7 @@ Vercel hosts the React frontend. The codebase already includes [vercel.json](fil
 4. Expand **Build and Output Settings**:
    - **Build Command**: Set to `npm run build` (override enabled)
    - **Output Directory**: Set to **`dist`** (override enabled)
-   - **Install Command**: Leave as default (override disabled)
+   - **Install Command**: Leave as default (override disabled). The repository already includes a `.npmrc` file configured to bypass legacy peer dependency conflicts automatically.
 5. Expand **Environment Variables** and add:
    - `VITE_SUPABASE_URL`: Your Supabase project URL.
    - `VITE_SUPABASE_ANON_KEY`: Your Supabase public anonymous API key.
