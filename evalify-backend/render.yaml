@@ -3,7 +3,6 @@ services:
     name: evalify-backend
     env: node
     plan: free
-    rootDir: evalify-backend
     buildCommand: npm install
     startCommand: npm start
     envVars:
@@ -12,12 +11,12 @@ services:
       - key: NODE_ENV
         value: production
       - key: FRONTEND_URL
-        sync: false # This should be set to your Vercel frontend URL (e.g. https://evalify-main.vercel.app)
+        sync: false
       - key: DATABASE_URL
-        sync: false # Your PostgreSQL connection URL
+        sync: false
       - key: SUPABASE_URL
-        sync: false # Your Supabase URL
+        sync: false
       - key: SUPABASE_ANON_KEY
-        sync: false # Your Supabase public anonymous key
+        sync: false
       - key: GLOT_TOKEN
-        sync: false # Your Glot.io API token
+        sync: false

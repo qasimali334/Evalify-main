@@ -80,16 +80,9 @@ This project is configured as a monorepo containing a React frontend and a Node.
 
 ### 1. Backend Deployment on Render ([evalify-backend](file:///d:/Projects/Evalify-main/evalify-backend))
 
-Render can deploy Node.js applications using a `render.yaml` Blueprint or manually as a Web Service.
+Render can deploy Node.js applications manually as a Web Service (recommended for this monorepo layout to keep the root clean) or using the blueprint file located at [render.yaml](file:///d:/Projects/Evalify-main/evalify-backend/render.yaml).
 
-#### Option A: Using the Render Blueprint (Recommended)
-1. Commit and push the [render.yaml](file:///d:/Projects/Evalify-main/render.yaml) file to your GitHub repository.
-2. Log in to [Render Dashboard](https://dashboard.render.com).
-3. Click **New +** and select **Blueprint**.
-4. Connect your GitHub repository. Render will automatically detect the configuration in `render.yaml`.
-5. Enter the required **Environment Variables** (listed below) and click **Deploy**.
-
-#### Option B: Manual Web Service Setup
+#### Option A: Manual Web Service Setup (Recommended)
 1. On the Render Dashboard, click **New +** and select **Web Service**.
 2. Connect your GitHub repository.
 3. Configure the following settings:
@@ -106,6 +99,13 @@ Render can deploy Node.js applications using a `render.yaml` Blueprint or manual
    - `SUPABASE_URL`: Your Supabase project URL.
    - `SUPABASE_ANON_KEY`: Your Supabase public anonymous API key.
    - `GLOT_TOKEN`: Your Glot.io API execution engine token (optional).
+
+#### Option B: Using the Render Blueprint
+*Note: Render Blueprint specifications normally expect the blueprint file to be at the root of the repository. Since we moved it to the backend subdirectory, you would only use this option if you are deploying the backend subdirectory as a standalone repository.*
+1. Use the [render.yaml](file:///d:/Projects/Evalify-main/evalify-backend/render.yaml) file inside the `evalify-backend` folder.
+2. Log in to [Render Dashboard](https://dashboard.render.com).
+3. Click **New +** and select **Blueprint**.
+4. Connect your repository and deploy.
 
 ---
 
