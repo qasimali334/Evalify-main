@@ -62,6 +62,15 @@ app.use('/api/announcements', announcementRoutes);
 app.use('/api/attendance', attendanceRoutes);
 app.use('/api/integrity', integrityRoutes);
 
+// Root route handler
+app.get('/', (req, res) => {
+    res.status(200).json({ 
+        status: 'ok', 
+        message: 'Evalify Backend API is running.',
+        healthCheck: '/api/health' 
+    });
+});
+
 // Basic health check
 app.get('/api/health', (req, res) => {
     res.status(200).json({ status: 'ok', message: 'Evalify Backend is running.' });
