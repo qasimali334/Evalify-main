@@ -16,7 +16,11 @@ app.use(cors({
 
         // Allow any port on localhost or 127.0.0.1 for local dev flexibility
         const isLocal = origin.startsWith('http://localhost:') || origin.startsWith('http://127.0.0.1:');
-        const isProdEnv = process.env.FRONTEND_URL && origin === process.env.FRONTEND_URL;
+        
+        // Normalize URLs (remove trailing slashes) for robust comparison
+        const cleanOrigin = origin.replace(/\/$/, "");
+        const cleanFrontendUrl = process.env.FRONTEND_URL ? process.env.FRONTEND_URL.replace(/\/$/, "") : "";
+        const isProdEnv = cleanFrontendUrl && cleanOrigin === cleanFrontendUrl;
 
         if (isLocal || isProdEnv) {
             callback(null, true);
